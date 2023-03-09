@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerUnit : Unit
 {
-    float moveSpeed = 5f;
     bool rolling = false;
+    bool invincible = false;
 
     private void Awake()
     {
@@ -20,7 +20,7 @@ public class PlayerUnit : Unit
             if (Input.GetKey(KeyCode.UpArrow) ||
                 Input.GetKey(KeyCode.DownArrow) ||
                 Input.GetKey(KeyCode.LeftArrow) ||
-                Input.GetKey(KeyCode.RightArrow) || rolling)
+                Input.GetKey(KeyCode.RightArrow))
             {
                 float hAxis = Input.GetAxisRaw("Horizontal");
                 float vAxis = Input.GetAxisRaw("Vertical");
@@ -29,8 +29,8 @@ public class PlayerUnit : Unit
 
                 inputDir.Normalize();
 
-                transform.position += inputDir * moveSpeed * Time.deltaTime;
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(inputDir), 0.1f);
+                transform.position += inputDir * MoveSpeed * Time.deltaTime;
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(inputDir), 0.3f);
                 Move();
                 if(Input.GetKeyDown(KeyCode.LeftShift))
                 {
@@ -50,7 +50,7 @@ public class PlayerUnit : Unit
         UnitState state = UnitState.ROLL;
 
         rolling = true;
-        moveSpeed = 7f;
+        MoveSpeed = 7f;
         StartCoroutine(RollCoroutine());
 
         ChangeState(state);
@@ -64,7 +64,7 @@ public class PlayerUnit : Unit
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Roll") &&
             anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f)
             {
-                moveSpeed = 5f;
+                MoveSpeed = 5f;
                 rolling = false;
                 break;
             }

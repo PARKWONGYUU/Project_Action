@@ -4,6 +4,27 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour
 {
+    private float hp;
+    private float damage;
+    private float moveSpeed = 5f;
+
+    public float Hp
+    {
+        get { return hp; }
+        set { hp = value; }
+    }
+    public float Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
+
+    public float MoveSpeed
+    {
+        get { return moveSpeed; }
+        set { moveSpeed = value; }
+    }
+
     public Animator anim;
     public enum UnitState
     {
