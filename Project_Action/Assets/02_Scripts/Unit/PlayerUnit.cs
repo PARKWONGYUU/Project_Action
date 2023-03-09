@@ -87,23 +87,6 @@ public class PlayerUnit : Unit
     }
     public override void Move()
     {
-        /*if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.position += new Vector3(0.0f, 0.0f, moveSpeed);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.position -= new Vector3(0.0f, 0.0f, moveSpeed);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position -= new Vector3(moveSpeed, 0.0f, 0);
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.position += new Vector3(moveSpeed, 0.0f, 0);
-        }
-        */
         UnitState state = UnitState.MOVE;
 
         ChangeState(state);
