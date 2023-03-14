@@ -15,12 +15,20 @@ public class PlayerUnit : Unit
     {
         while (true)
         {
-            ChangeAnim(nowState.ToString(), false);
+            //ChangeAnim(nowState.ToString(), false);
+            if(Input.GetKey(KeyCode.A))
+            {
+                Attack();
+            }
+            else
+            {
+                Idle();
+            }
 
-            if (Input.GetKey(KeyCode.UpArrow) ||
+            if ((Input.GetKey(KeyCode.UpArrow) ||
                 Input.GetKey(KeyCode.DownArrow) ||
                 Input.GetKey(KeyCode.LeftArrow) ||
-                Input.GetKey(KeyCode.RightArrow))
+                Input.GetKey(KeyCode.RightArrow)) & (nowState == UnitState.IDLE || nowState == UnitState.MOVE))
             {
                 float hAxis = Input.GetAxisRaw("Horizontal");
                 float vAxis = Input.GetAxisRaw("Vertical");
@@ -84,7 +92,22 @@ public class PlayerUnit : Unit
 
         ChangeState(state);
         ChangeAnim(state.ToString());
+
+        StartCoroutine(AttackCoroutine());
+
     }
+    IEnumerator AttackCoroutine()
+    {
+        while(true)
+        {
+            if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f && Input.GetKey(KeyCode.A))
+            {
+
+            }
+            yield return null;
+        }
+    }
+
     public override void Move()
     {
         UnitState state = UnitState.MOVE;

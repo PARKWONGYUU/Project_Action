@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
         //초기값 설정
         if (PlayerPrefs.GetInt("FirstStart") == 0)
         {
+            PlayerPrefs.SetInt("FirstStart", 1);
         }
     }
 }
